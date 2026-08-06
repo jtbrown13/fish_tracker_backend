@@ -36,8 +36,20 @@ const addNewFish = (req, res) => {
     });
 };
 
+// PUT (modify account infomration)
+const updateFish = (req, res) => {
+    const id = parseInt(req.params.id);
+    const { fishname } = req.body;
+    pool.query(queries.updateFish, [fishname, id], (error,results)=> {
+        if(error)throw error;
+        //res.status(200).json(results.rows);
+        res.status(201).send("Succesfully modified a fish");
+    });
+};
+
 module.exports ={
     getFishes,
     getFishByID,
     addNewFish,
+    updateFish,
 };
